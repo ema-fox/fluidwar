@@ -1,4 +1,5 @@
-SIZE = 50
+SIZE = 100
+PXSIZE = 5
 
 class Map
   constructor: (@size) ->
@@ -20,7 +21,7 @@ for i in [SIZE * 0.3...SIZE | 0]
 
 soliders = 0
 
-for j in [0...4]
+for j in [0...SIZE * 0.1 | 0]
   for i in [0...SIZE]
     map.set [i, j], 1
     soliders++
@@ -64,7 +65,7 @@ walkToPlayer = ->
         nvis++
       for pb in ngbrs p, fixed
         if map.get(pb) is 1
-          if map.get(p) is 0# and Math.random() > 0.5
+          if map.get(p) is 0 and Math.random() > 0.2
             map.set p, 1
             map.set pb, 0
           else
@@ -81,13 +82,13 @@ ctx = null
 
 draw = ->
   ctx.fillStyle = "#000000"
-  ctx.fillRect 0, 0, SIZE * 10, SIZE * 10
+  ctx.fillRect 0, 0, SIZE * PXSIZE, SIZE * PXSIZE
   for p0 in [0...SIZE]
     for p1 in [0...SIZE]
       foo = map.get [p0, p1]
       if foo
         ctx.fillStyle = "rgb(0, " + foo * 100 + ", 0)"
-        ctx.fillRect p0 * 10, p1 * 10, 10, 10 
+        ctx.fillRect p0 * PXSIZE, p1 * PXSIZE, PXSIZE, PXSIZE 
   ctx.fillStyle = "#ffffff"
   ctx.fillText nvis, 50, 50
   null
@@ -100,5 +101,5 @@ $ ->
   cnvs = $ 'canvas'
   ctx = cnvs[0].getContext '2d'
   $(document).mousemove (evt) ->
-    player = [Math.max(0, Math.min(SIZE - 1, (evt.pageX - cnvs.offset().left) / 10 | 0)), Math.max(0, Math.min(SIZE - 1, (evt.pageY - cnvs.offset().top) / 10 | 0))]
+    player = [Math.max(0, Math.min(SIZE - 1, (evt.pageX - cnvs.offset().left) / PXSIZE | 0)), Math.max(0, Math.min(SIZE - 1, (evt.pageY - cnvs.offset().top) / PXSIZE | 0))]
   setInterval step, 40 
