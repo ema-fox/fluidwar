@@ -78,8 +78,11 @@ walkToPlayer = (pp, pn) ->
         visited.set pb, 1
         nvis++
       for pb in ngbrs p, fixed, false
-        if map.get(pb) is pn
-          pfoo = map.get p
+        pfoo = map.get p
+        pbar = map.get pb
+        if pfoo is 2 and pbar is 0
+            computer = p
+        if pbar is pn
           if pfoo > 1 and not (pfoo is pn) and Math.random() > 0.9
             map.set p, pn
             nsoliders[pfoo]--
