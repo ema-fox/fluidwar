@@ -185,10 +185,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     if (nsoliders[2] === 0) {
       alert("The computer won :(");
       clearInterval(intervalId);
+      ga('send', 'event', 'game', 'won', 'computer');
     }
     if (nsoliders[3] === 0) {
       alert("You won!");
-      return clearInterval(intervalId);
+      clearInterval(intervalId);
+      return ga('send', 'event', 'game', 'won', 'player');
     }
   };
 
