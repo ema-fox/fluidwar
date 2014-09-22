@@ -98,7 +98,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   nvis = 0;
 
   walkToPlayer = function(pp, pn) {
-    var fixed, frontier, movedSoliders, newfrontier, p, pb, pc, pfoo, visited, _len, _len1, _len2, _m, _n, _o, _ref2, _ref3;
+    var fixed, frontier, movedSoliders, newfrontier, p, pb, pbar, pc, pfoo, visited, _len, _len1, _len2, _m, _n, _o, _ref2, _ref3;
     frontier = [pp];
     movedSoliders = 0;
     fixed = new Map(SIZE);
@@ -119,8 +119,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         _ref3 = ngbrs(p, fixed, false);
         for (_o = 0, _len2 = _ref3.length; _o < _len2; _o++) {
           pb = _ref3[_o];
-          if (map.get(pb) === pn) {
-            pfoo = map.get(p);
+          pfoo = map.get(p);
+          pbar = map.get(pb);
+          if (pfoo === 2 && pbar === 0) {
+            computer = p;
+          }
+          if (pbar === pn) {
             if (pfoo > 1 && !(pfoo === pn) && Math.random() > 0.9) {
               map.set(p, pn);
               nsoliders[pfoo]--;
